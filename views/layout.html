@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block juice %}Wikistack{% endblock %}</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  </head>
+  <body>
+  <div>
+	  <nav id="navigation" class="navbard navbar-default navbar-fixed-top">
+	  	<div class="container">
+	  		  <ul class="nav navbar-nav">
+			  	<li><a href="/">WikiStack</a></li>
+			  	<li><a href="/addpage">Add Page</a></li>
+  			</ul>
+	  	</div>
+	  </nav>
+</div>
+ 
+    {% block content %}
+  {% endblock %}
+  </body>
+</html>

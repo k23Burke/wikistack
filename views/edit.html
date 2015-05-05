@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block juice%}Add Page{% endblock %}
+{% block content %}
+<h2>EDIT PAGE</h2>
+
+<hr>
+
+<form method="POST" action="">
+	<input type="hidden" name="id" value="{{article.id}}">
+	<div class='form-group'>
+		<label for="pageTitle">Page Title</label>
+		<input name="title" type="text" class="form-control" id="inputTitle" value="{{article.title}}">
+	</div>
+
+	<div class='form-group'>
+		<label for="pageContent">Page Content</label>
+		<textarea name='content' class="form-control" id="pageContent">{{article.body}}</textarea>
+	</div>
+	<button type="submit" class="btn btn-default">Submit</button>
+</form>
+
+{% endblock %}

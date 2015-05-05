@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<h2>{{article.title}}</h2>
+<hr>
+<div id="article">
+	{{article.body | markdown }}
+</div>
+
+<button id="submit">{{article | page_linkEdit}}</a></button>
+
+
+
+{% endblock %}

@@ -26,7 +26,9 @@ pageSchema.virtual('full_route').get(function(){
 
 var userSchema = new mongoose.Schema({
   name:  { first: String, last: String },
-  email: String
+  email: String,
+  password: String,
+  username: String
 });
 
 // converting them into object form

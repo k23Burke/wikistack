@@ -17,19 +17,17 @@ router.post('/', function(req, res){
 	var title = req.body.title;
 	var body = req.body.content;
 	var url = generateUrlName(title);
+	var tagArr = req.body.tags.split(",");
+	console.log(tagArr);
 
 	var page = new models.Page({
 		title: title,
 		body: body,
-		url_name: url
+		url_name: url,
+		tags: tagArr
 	});
 	page.save(function(err, doc) {
-		// console.log('page', page);
-		// console.log('doc', doc);
-
-		// console.log('route', page.full_route);
 		res.redirect(page.full_route);
-		//res.send("Submitted!");
 	});
 
 })

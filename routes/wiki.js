@@ -6,8 +6,17 @@ var models = require('../models/index');
 router.get('/:artName', function(req, res, next) {
 	var artN = req.params.artName;
 	models.Page.find({url_name : artN}, function(err, data) {
-		// console.log(data);
-		res.render('wiki', {article: data[0]});
+		console.log(data[0]);
+		if (data[0].tags && data[0].tags[0] !== '') {
+			var tagArr = data[0].tags;
+			console.log("TAGSSS", data[0].tags)
+			models.Page.find({tags :  {$elemMatch: {$in: tagArr}}}, function(err, relTag) {
+				console.log("RELATED ARTICLES", relTag);
+				res.render('wiki', {article: data[0], relateArt: relTag});
+			})
+		} else {
+			res.render('wiki', {article: data[0]});
+		}
 		//res.send('HERE');
 	})
 });
@@ -16,7 +25,17 @@ router.get('/:artName/edit', function(req, res){
 	var artN = req.params.artName;
 	models.Page.find({url_name : artN}, function(err, data) {
 		// console.log(data);
-		res.render('edit', {article: data[0]});
+		var tagsJoined = data[0].tags.join(",");
+		res.render('edit', {article: data[0], likeTags: tagsJoined});
+	});
+});
+
+router.get('/:artName/delete', function(req, res){
+	var artN = req.params.artName;
+	models.Page.find({url_name: artN}, function(err, data){
+		console.log(data);
+		data[0].remove();
+		res.redirect('/');
 	});
 });
 
@@ -27,10 +46,13 @@ router.post('/:artName/edit', function(req, res){
 	var body = req.body.content;
 	var title = req.body.title;
 	var url = generateUrlName(title);
+	var tags = req.body.tags.split(",");
+
 	models.Page.findOne({_id: id}, function(err, doc){
 		console.log('THE DOC', doc);
 		doc.title = title;
 		doc.body = body;
+		doc.tags = tags;
 		doc.url_name = url;
 		doc.save(function(err, doc){
 			res.redirect('/wiki/'+url);

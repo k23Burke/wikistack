@@ -4,7 +4,7 @@
 <h2>ADD A PAGE</h2>
 
 <hr>
-
+<div class="container">
 <form method="POST" action="addpage">
 	<div class='form-group'>
 		<label for="pageTitle">Page Title</label>
@@ -13,9 +13,16 @@
 
 	<div class='form-group'>
 		<label for="pageContent">Page Content</label>
-		<textarea name='content' class="form-control" id="pageContent"></textarea>
+		<textarea name='content' class="form-control" id="pageContent" rows="13"></textarea>
 	</div>
+
+	<!-- Added a tags input -->
+	<div class='form-group'>
+		<label for="tags">Tags</label>
+		<input name="tags" type="text" class="form-control" id="tags">
+	</div>
+
 	<button type="submit" class="btn btn-default">Submit</button>
 </form>
-
+</div>
 {% endblock %}

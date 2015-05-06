@@ -5,10 +5,11 @@ var models = require('../models/index');
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	models.Page.find({}, function(err, pages){
-		// console.log(pages);
-		res.render('index', { docs: pages });
+		res.render('index', { title:'Browse My Wikistack',docs: pages });
 	});
  
 });
+
+
 
 module.exports = router;

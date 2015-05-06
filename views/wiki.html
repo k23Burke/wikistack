@@ -3,12 +3,33 @@
 {% block content %}
 
 <h2>{{article.title}}</h2>
+{% if article.tags[0] %}
+	<ul id="listedTag">
+
+		{% for tag in article.tags %}
+			<li><a href="../tag/{{tag}}">{{tag}}</a></li>
+		{% endfor %}
+	</ul>
+
+{% endif %}
+
 <hr>
 <div id="article">
 	{{article.body | markdown }}
 </div>
 
-<button id="submit">{{article | page_linkEdit}}</a></button>
+<button id="submit">{{article | page_linkEdit}}</button>
+<button id="delete">{{article | page_linkDelete}}</button>
+
+{% if relateArt.length > 0 %}
+	<h5>Related Articles</h5>
+	{% for article in relateArt %}
+	<ul>
+		<li>{{ article | page_link }}</li>
+	</ul>
+
+	{% endfor %}
+{% endif %}
 
 
 

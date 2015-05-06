@@ -27,7 +27,18 @@ module.exports = function(swig) {
 
   swig.setFilter('page_linkEdit', page_linkEdit);
 
+var page_linkDelete = function (doc){
+  var link_name;
+    if (typeof doc.title !== "undefined" && doc.title !== "") {
+      link_name = doc.title
+    } else {
+      link_name = "Page "+doc.url_name;
+    }
+    return "<a href='"+doc.full_route+"/delete'>Delete "+link_name+"</a>";
+  };
+  page_linkDelete.safe = true;
 
+  swig.setFilter('page_linkDelete', page_linkDelete);
 
 
 
